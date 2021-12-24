@@ -84,6 +84,6 @@ public class LoadApp {
 
     public Sink<Pair, CompletionStage<Long>> createSink() {
         return Flow.<Pair<String, Integer>>create()
-                .mapConcat((pair) -> Collections.nCopies(pair.first(), pair.second())
+                .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first())
     }
 }

@@ -4,6 +4,7 @@ import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.*;
+import akka.japi.Pair;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
@@ -40,7 +41,7 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
-                    return new Pair();
+                    return new Pair("aaa", 6);
                 });
     }
 }

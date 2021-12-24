@@ -78,7 +78,7 @@ public class LoadApp {
     public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
 
         Sink<Pair, CompletionStage<Long>> testSink = createSink();
-        Source.from(Collections.singletonList(r))
+        Source.from(Collections.singletonList(pair))
                 .toMat(testSink, Keep.right()).run(materializer);
     }
 

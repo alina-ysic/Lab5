@@ -12,7 +12,7 @@ public class CacheActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(String.class, msg -> sender().tell(cache.get(msg), ActorRef.noSender()))
+                .match(String.class, url -> sender().tell(cache.get(url), ActorRef.noSender()))
                 .build();
     }
 }

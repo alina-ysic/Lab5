@@ -57,8 +57,8 @@ public class LoadApp {
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
-                            .thenCompose((requestResult) -> {
-
+                            .thenCompose((result) -> {
+                                if (result == null)  
                             });
                     return null;
                 });

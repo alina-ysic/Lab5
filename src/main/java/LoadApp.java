@@ -31,4 +31,8 @@ public class LoadApp {
                 .thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> system.terminate());
     }
+
+    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow() {
+        
+    }
 }

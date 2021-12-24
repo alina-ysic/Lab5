@@ -86,7 +86,8 @@ public class LoadApp {
         return Flow.<Pair<String, Integer>>create()
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {
-                    
+                    long startTime = System.nanoTime();
+                    return asyncHtt
                 })
     }
 }

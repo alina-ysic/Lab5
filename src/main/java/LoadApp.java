@@ -16,7 +16,7 @@ public class LoadApp {
 
     private static final String URL_PARAM = "testUrl";
     private static final String COUNT_PARAM = "count";
-    private static final Integer ASYNC_
+    private static final Integer ASYNC_COUNT = 5;
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -46,6 +46,9 @@ public class LoadApp {
                     int count = Integer.parseInt(queue.get(COUNT_PARAM).get());
                     return new Pair(url, count);
                 })
-                .mapAsync();
+                .mapAsync(ASYNC_COUNT, (pair) -> {
+                    
+                }
+        });
     }
 }

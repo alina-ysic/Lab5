@@ -71,5 +71,5 @@ public class LoadApp {
                 });
     }
 
-    public CompletionStage<Response> 
+    public CompletionStage<Response> ping()
 }

@@ -39,8 +39,8 @@ public class LoadApp {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {
-                    Query queue = request.getUri().query();
-                    int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
+                    //Query queue = request.getUri().query();
+                    //int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
                     return HttpResponse.create().withEntity("ffff");
                 });
     }

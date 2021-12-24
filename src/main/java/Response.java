@@ -1,13 +1,16 @@
+import org.w3c.dom.html.HTMLImageElement;
+
 public class Response {
 
     private String url;
-    privateInteger time;
+    private Integer time;
 
     public Response(String url, Integer time) {
-
+        this.time = time;
+        this.url = url;
     }
 
-    public privateInteger getTime() {
+    public Integer getTime() {
         return time;
     }
 

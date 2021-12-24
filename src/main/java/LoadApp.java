@@ -77,7 +77,7 @@ public class LoadApp {
                 });
     }
 
-    public CompletionStage<Response> ping(Pair<String, Integer> pair, ActorMaterializer materializer) {
+    public static CompletionStage<Response> ping(Pair<String, Integer> pair, ActorMaterializer materializer) {
 
         Sink<Pair<String, Integer>, CompletionStage<Long>> testSink = createSink();
         Source.from(Collections.singletonList(pair))
@@ -86,7 +86,7 @@ public class LoadApp {
                 .thenApply(finalTime -> new Response(pair.first(), (int) (finalTime / pair.second())));
     }
 
-    public Sink<Pair<String, Integer>, CompletionStage<Long>> createSink() {
+    public static Sink<Pair<String, Integer>, CompletionStage<Long>> createSink() {
         return Flow.<Pair<String, Integer>>create()
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {

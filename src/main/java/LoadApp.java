@@ -5,6 +5,7 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.*;
 import akka.japi.Pair;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
@@ -47,7 +48,7 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    
+                    Patterns.ask()
                 }
         });
     }

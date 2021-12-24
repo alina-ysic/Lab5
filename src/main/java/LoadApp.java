@@ -83,6 +83,6 @@ public class LoadApp {
     }
 
     public Sink<Pair, CompletionStage<Long>> createSink() {
-
+        return Flow
     }
 }

@@ -11,6 +11,7 @@ import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 
 import java.time.Duration;
@@ -76,12 +77,12 @@ public class LoadApp {
 
     public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
 
-        Sink<Pair, > testSink = createSink();
+        Sink<Pair, CompletionStage<Long>> testSink = createSink();
         Source.from(Collections.singletonList(r))
                 .toMat(testSink, Keep.right()).run(materializer);
     }
 
-    public Sink createSink() {
+    public Sink<Pair, CompletionStage<Long>> createSink() {
 
     }
 }

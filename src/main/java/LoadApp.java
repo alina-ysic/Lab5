@@ -13,6 +13,8 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.Dsl;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -29,6 +31,7 @@ public class LoadApp {
     private static final String COUNT_PARAM = "count";
     private static final Integer ASYNC_COUNT = 5;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
+    private final AsyncHttpClient asyncHttpClient = Dsl.asyncHttpClient();
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -87,7 +90,11 @@ public class LoadApp {
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {
                     long startTime = System.currentTimeMillis();
-                    return asyncHtt
+                    return asyncHttpClient
+                            .prepareGet(url)
+                            .execute()
+                            .toCompletableFuture()
+                            .thenApply(((response) -> System.currentTimeMillis() - startTime));
                 })
     }
 }

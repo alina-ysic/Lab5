@@ -35,7 +35,7 @@ public class LoadApp {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {
-                    
+
                 });
     }
 }

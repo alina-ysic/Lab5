@@ -96,5 +96,6 @@ public class LoadApp {
                             .toCompletableFuture()
                             .thenApply((response -> CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)));
                 })
+                .toMat(Sink.fold(0, Long::sum), Keep.right());
     }
 }

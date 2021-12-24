@@ -41,7 +41,7 @@ public class LoadApp {
                 .of(HttpRequest.class)
                 .map((request) -> {
                     Query queue = request.getUri().query();
-                    int count = Integer.parseInt(queue.get())
+                    int count = Integer.parseInt(queue.get(URL_PARAM));
                 });
     }
 }

@@ -62,6 +62,6 @@ public class LoadApp {
                             });
                     return null;
                 })
-                .;
+                .map();
     }
 }

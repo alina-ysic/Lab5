@@ -54,7 +54,7 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    Patterns.ask(cacheActor, pair.first(), TIMEOUT)
+                    ((CompletionStage) Patterns.ask(cacheActor, pair.first(), TIMEOUT))
                             .thenCompose((requestResult) -> {
 
                             });

@@ -66,12 +66,12 @@ public class LoadApp {
                 .map((result) -> {
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
-                            HttpEntities.create("URL: " + result.getUrl() + " RESPONSE TIME: " + result.getTime())
+                            HttpEntities.create("URL: " + result.getUrl() + " RESPONSE TIME: " + result.getTime());
                     )
                 });
     }
 
     public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
-        
+
     }
 }

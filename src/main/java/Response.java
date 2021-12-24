@@ -1,10 +1,17 @@
 public class Response {
 
-    public void getUrl() {
+    private String url;
+    privateInteger time;
+
+    public Response(String url, Integer time) {
 
     }
 
-    public void getTime() {
+    public privateInteger getTime() {
+        return time;
+    }
 
+    public String getUrl() {
+        return url;
     }
 }

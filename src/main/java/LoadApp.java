@@ -58,6 +58,10 @@ public class LoadApp {
                             .thenCompose((requestResult) -> {
 
                             });
+                    Patterns.ask(cacheActor, pair.first(), TIMEOUT)
+                            .thenCompose((requestResult) -> {
+
+                            });
                     return null;
                 });
     }

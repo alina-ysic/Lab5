@@ -10,6 +10,7 @@ import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import java.util.concurrent.CompletableFuture;
 
 import java.io.IOException;
 import java.util.Queue;

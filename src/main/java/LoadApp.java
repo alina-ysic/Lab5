@@ -41,8 +41,8 @@ public class LoadApp {
                 .of(HttpRequest.class)
                 .map((request) -> {
                     Query queue = request.getUri().query();
-                    String url = String.valueOf(queue.get(URL_PARAM));
-                    int count = Integer.parseInt(String.valueOf(queue.get(COUNT_PARAM)));
+                    String url = queue.get(URL_PARAM).get();
+                    int count = Integer.parseInt(queue.get(COUNT_PARAM).get());
                     return new Pair(url, count);
                 })
                 .mapAsync();

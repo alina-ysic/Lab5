@@ -29,7 +29,7 @@ public class LoadApp {
     private static final String COUNT_PARAM = "count";
     private static final Integer ASYNC_COUNT = 5;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
-    private final AsyncHttpClient asyncHttpClient = Dsl.asyncHttpClient();
+    private static final AsyncHttpClient asyncHttpClient = Dsl.asyncHttpClient();
     private static final Long ZERO= 0L;
 
     public static void main(String[] args) throws IOException {
@@ -65,7 +65,7 @@ public class LoadApp {
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
                                 if (result != null) return CompletableFuture.completedFuture(result);
-                                ping(pair);
+                                return ping(pair, materializer);
                             });
                     return new Response();
                 })
@@ -80,7 +80,7 @@ public class LoadApp {
     public static CompletionStage<Response> ping(Pair<String, Integer> pair, ActorMaterializer materializer) {
 
         Sink<Pair<String, Integer>, CompletionStage<Long>> testSink = createSink();
-        Source.from(Collections.singletonList(pair))
+        return Source.from(Collections.singletonList(pair))
                 .toMat(testSink, Keep.right())
                 .run(materializer)
                 .thenApply(finalTime -> new Response(pair.first(), (int) (finalTime / pair.second())));

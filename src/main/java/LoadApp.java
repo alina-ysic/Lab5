@@ -53,6 +53,7 @@ public class LoadApp {
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
+                            .
                 }
         });
     }

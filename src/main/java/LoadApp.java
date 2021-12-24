@@ -10,6 +10,8 @@ import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.concurrent.CompletionStage;
@@ -54,10 +56,10 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    ((CompletionStage) Patterns.ask(cacheActor, pair.first(), TIMEOUT))
+                    /*((CompletionStage) Patterns.ask(cacheActor, pair.first(), TIMEOUT))
                             .thenCompose((requestResult) -> {
 
-                            });
+                            });*/
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((requestResult) -> {
 

@@ -1,2 +1,2 @@
-package PACKAGE_NAME;public class CacheActor {
+public class CacheActor {
 }

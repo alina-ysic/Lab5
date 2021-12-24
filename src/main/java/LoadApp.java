@@ -10,8 +10,11 @@ import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Source;
 
 import java.time.Duration;
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.concurrent.CompletionStage;
@@ -72,6 +75,7 @@ public class LoadApp {
     }
 
     public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
-
+        Source.from(Collections.singletonList(r))
+                .toMat(testSink, Keep.right()).run(materializer);
     }
 }

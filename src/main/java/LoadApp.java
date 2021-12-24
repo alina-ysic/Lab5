@@ -19,11 +19,9 @@ import org.asynchttpclient.Dsl;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.concurrent.CompletionStage;
 
 import java.io.IOException;
-import java.util.Queue;
 
 public class LoadApp {
 
@@ -79,14 +77,16 @@ public class LoadApp {
                 });
     }
 
-    public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
+    public CompletionStage<Response> ping(Pair<String, Integer> pair, ActorMaterializer materializer) {
 
-        Sink<Pair, CompletionStage<Long>> testSink = createSink();
+        Sink<Pair<String, Integer>, CompletionStage<Long>> testSink = createSink();
         Source.from(Collections.singletonList(pair))
-                .toMat(testSink, Keep.right()).run(materializer);
+                .toMat(testSink, Keep.right())
+                .run(materializer)
+                .thenApply(finalTime -> new Response(pair.first(), (int) (finalTime / pair.second())));
     }
 
-    public Sink<Pair, CompletionStage<Long>> createSink() {
+    public Sink<Pair<String, Integer>, CompletionStage<Long>> createSink() {
         return Flow.<Pair<String, Integer>>create()
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {

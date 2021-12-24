@@ -32,6 +32,7 @@ public class LoadApp {
     private static final Integer ASYNC_COUNT = 5;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
     private final AsyncHttpClient asyncHttpClient = Dsl.asyncHttpClient();
+    private static final Long ZERO= 0L;
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -96,6 +97,6 @@ public class LoadApp {
                             .toCompletableFuture()
                             .thenApply((response -> CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)));
                 })
-                .toMat(Sink.fold(0, Long::sum), Keep.right());
+                .toMat(Sink.fold(ZERO, Long::sum), Keep.right());
     }
 }

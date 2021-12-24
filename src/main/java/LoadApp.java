@@ -14,6 +14,9 @@ import java.util.Queue;
 import java.util.concurrent.CompletionStage;
 
 public class LoadApp {
+
+    private static final String URL
+
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
         ActorSystem system = ActorSystem.create("routes");

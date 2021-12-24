@@ -67,7 +67,6 @@ public class LoadApp {
                                 if (result != null) return CompletableFuture.completedFuture(result);
                                 return ping(pair, materializer);
                             });
-                    return new Response();
                 })
                 .map((result) -> {
                     cacheActor.tell(result, ActorRef.noSender());

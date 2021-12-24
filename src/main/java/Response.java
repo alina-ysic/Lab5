@@ -1,4 +1,3 @@
-import org.w3c.dom.html.HTMLImageElement;
 
 public class Response {
 

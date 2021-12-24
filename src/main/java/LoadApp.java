@@ -65,7 +65,7 @@ public class LoadApp {
                 .map((result) -> {
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
-                            HttpEntities.create()
+                            HttpEntities.create("")
                     )
                 });
     }

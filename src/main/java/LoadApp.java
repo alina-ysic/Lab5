@@ -63,7 +63,7 @@ public class LoadApp {
                     return null;
                 })
                 .map((result) -> {
-                    
+                    cacheActor.tell(result, ActorRef.noSender());
                 });
     }
 }

@@ -11,11 +11,11 @@ import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 import java.util.concurrent.CompletionStage;
 
 import java.io.IOException;
 import java.util.Queue;
-import java.util.concurrent.CompletionStage;
 
 public class LoadApp {
 

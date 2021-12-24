@@ -6,6 +6,7 @@ import akka.http.javadsl.ServerBinding;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
+import akka.http.javadsl.model.StatusCodes;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
@@ -42,7 +43,7 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
-                    return "fff";
+                    return HttpResponse.create().withStatus(StatusCodes.OK);
                 });
     }
 }

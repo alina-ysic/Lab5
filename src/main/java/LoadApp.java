@@ -95,7 +95,7 @@ public class LoadApp {
                             .prepareGet(url)
                             .execute()
                             .toCompletableFuture()
-                            .thenApply((response -> CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)));
+                            .thenApply((response -> System.currentTimeMillis() - startTime));
                 })
                 .toMat(Sink.fold(ZERO, Long::sum), Keep.right());
     }

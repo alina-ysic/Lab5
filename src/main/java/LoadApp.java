@@ -24,7 +24,7 @@ public class LoadApp {
     private static final String URL_PARAM = "testUrl";
     private static final String COUNT_PARAM = "count";
     private static final Integer ASYNC_COUNT = 5;
-    private static final int TIMEOUT = 5;
+    private static final Duration TIMEOUT = Duration.ofSeconds(5);
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -56,10 +56,6 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    /*((CompletionStage) Patterns.ask(cacheActor, pair.first(), TIMEOUT))
-                            .thenCompose((requestResult) -> {
-
-                            });*/
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((requestResult) -> {
 

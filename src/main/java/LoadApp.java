@@ -75,7 +75,13 @@ public class LoadApp {
     }
 
     public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
+
+        Sink testSink = createSink();
         Source.from(Collections.singletonList(r))
                 .toMat(testSink, Keep.right()).run(materializer);
+    }
+
+    public Sink createSink() {
+        
     }
 }

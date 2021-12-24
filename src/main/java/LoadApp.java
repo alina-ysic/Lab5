@@ -1,6 +1,7 @@
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
@@ -26,8 +27,8 @@ public class LoadApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer =
                 ActorMaterializer.create(system);
-        ActorRef cacheActor = new CacheActor();
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = getFlow(http, system, materializer);
+        ActorRef cacheActor = system.actorOf(Props.create(CacheActor.class));
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = getFlow(cacheActor, http, system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -40,7 +41,7 @@ public class LoadApp {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(Http http, ActorSystem system, ActorMaterializer materializer) {
+    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(ActorRef cacheActor, Http http, ActorSystem system, ActorMaterializer materializer) {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {
@@ -50,7 +51,7 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    Patterns.ask()
+                    Patterns.ask(cacheActor, )
                 }
         });
     }

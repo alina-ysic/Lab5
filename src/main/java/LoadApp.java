@@ -71,5 +71,7 @@ public class LoadApp {
                 });
     }
 
-    public CompletionStage<Response> ping()
+    public CompletionStage<Response> ping(Pair pair, ActorMaterializer materializer) {
+        
+    }
 }

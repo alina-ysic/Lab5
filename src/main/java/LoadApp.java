@@ -94,7 +94,7 @@ public class LoadApp {
                             .prepareGet(url)
                             .execute()
                             .toCompletableFuture()
-                            .thenApply((response -> CompletableFuture.completedFutureSystem.currentTimeMillis() - startTime));
+                            .thenApply((response -> CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)));
                 })
     }
 }

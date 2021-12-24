@@ -51,7 +51,7 @@ public class LoadApp {
                     return new Pair(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> {
-                    Patterns.ask(cacheActor, )
+                    Patterns.ask(cacheActor, pair.first(), )
                 }
         });
     }

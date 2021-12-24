@@ -34,6 +34,8 @@ public class LoadApp {
     public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(Http http, ActorSystem system, ActorMaterializer materializer) {
         return Flow
                 .of(HttpRequest.class)
-                .;
+                .map((request) -> {
+                    
+                });
     }
 }

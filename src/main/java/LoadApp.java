@@ -40,7 +40,7 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
-                    return HttpResponse.create().withStatus(StatusCodes.OK).withEntity(HttpEntities.create("aaa"));
+                    return new Pair();
                 });
     }
 }

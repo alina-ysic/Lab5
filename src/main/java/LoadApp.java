@@ -15,7 +15,7 @@ import java.util.concurrent.CompletionStage;
 public class LoadApp {
 
     private static final String URL_PARAM = "testUrl";
-    private static final String URL_PARAM = "testUrl";
+    private static final String COUNT_PARAM = "count";
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -42,7 +42,9 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     String url = String.valueOf(queue.get(URL_PARAM));
-                    return HttpResponse.create().withEntity(url);
-                });
+                    int count = Integer.parseInt(String.valueOf(queue.get(COUNT_PARAM)));
+                    return new Pair(url, count);
+                })
+                .mapAsync();
     }
 }

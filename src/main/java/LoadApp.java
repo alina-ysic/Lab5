@@ -59,7 +59,7 @@ public class LoadApp {
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
                                 if (result != null) return CompletableFuture.completedFuture(result);
-                                
+                                ping(pair);
                             });
                     return new Response();
                 })
@@ -70,4 +70,6 @@ public class LoadApp {
                     )
                 });
     }
+
+    pubic 
 }

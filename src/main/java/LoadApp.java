@@ -9,6 +9,7 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
 import java.io.IOException;
+import java.util.Queue;
 import java.util.concurrent.CompletionStage;
 
 public class LoadApp {
@@ -35,7 +36,7 @@ public class LoadApp {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {
-
+                    Query queue = request.getUri().query();
                 });
     }
 }

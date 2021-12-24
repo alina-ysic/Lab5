@@ -71,5 +71,5 @@ public class LoadApp {
                 });
     }
 
-    pubic 
+    public CompletionStage<Response> 
 }

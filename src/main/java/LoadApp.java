@@ -15,6 +15,7 @@ import java.util.concurrent.CompletionStage;
 public class LoadApp {
 
     private static final String URL_PARAM = "testUrl";
+    private static final String URL_PARAM = "testUrl";
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");

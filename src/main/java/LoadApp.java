@@ -3,10 +3,7 @@ import akka.actor.ActorSystem;
 import akka.http.javadsl.ConnectHttp;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.ServerBinding;
-import akka.http.javadsl.model.HttpRequest;
-import akka.http.javadsl.model.HttpResponse;
-import akka.http.javadsl.model.Query;
-import akka.http.javadsl.model.StatusCodes;
+import akka.http.javadsl.model.*;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 
@@ -43,7 +40,7 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
-                    return HttpResponse.create().withStatus(StatusCodes.OK).withEntity(new );
+                    return HttpResponse.create().withStatus(StatusCodes.OK).withEntity(HttpEntities.create("aaa"));
                 });
     }
 }

@@ -60,12 +60,12 @@ public class LoadApp {
                             .thenCompose((result) -> {
                                 //if (result == null) return
                             });
-                    return null;
+                    return new Response();
                 })
                 .map((result) -> {
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
-                            HttpEntities.create("")
+                            HttpEntities.create("URL: " + result.getUrl() + " RESPONSE TIME: " + result.getTime())
                     )
                 });
     }

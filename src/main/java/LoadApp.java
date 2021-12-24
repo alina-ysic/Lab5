@@ -16,6 +16,7 @@ public class LoadApp {
 
     private static final String URL_PARAM = "testUrl";
     private static final String COUNT_PARAM = "count";
+    private static final Integer ASYNC_
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");

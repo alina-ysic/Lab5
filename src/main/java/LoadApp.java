@@ -18,8 +18,7 @@ public class LoadApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer =
                 ActorMaterializer.create(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = null; /*= <вызов
-        метода которому передаем Http, ActorSystem и ActorMaterializer>;*/
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = getFlow(http, system, materializer)
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
@@ -32,7 +31,7 @@ public class LoadApp {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow() {
+    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(Http http, ActorSystem system, ActorMaterializer materializer) {
         
     }
 }

@@ -58,7 +58,8 @@ public class LoadApp {
                 .mapAsync(ASYNC_COUNT, (pair) -> {
                     Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
-                                if (result != null) return
+                                if (result != null) return CompletableFuture.completedFuture(result);
+                                
                             });
                     return new Response();
                 })

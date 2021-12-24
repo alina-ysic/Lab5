@@ -42,7 +42,7 @@ public class LoadApp {
                 .map((request) -> {
                     Query queue = request.getUri().query();
                     int count = Integer.parseInt(String.valueOf(queue.get(URL_PARAM)));
-                    return null;
+                    return 5;
                 });
     }
 }

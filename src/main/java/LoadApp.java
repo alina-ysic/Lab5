@@ -63,7 +63,7 @@ public class LoadApp {
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
-                                if (result != null) return CompletableFuture.completedFuture(new Pair<>(pair.first(), (Integer) result));
+                                if (result != null) return CompletableFuture.completedFuture(new Response(pair.first(), (Integer) result));
                                 return ping(pair, materializer);
                             }))
                 .map((result) -> {
@@ -80,7 +80,7 @@ public class LoadApp {
         return Source.from(Collections.singletonList(pair))
                 .toMat(testSink, Keep.right())
                 .run(materializer)
-                .thenApply(finalTime -> new Pair<>(pair.first(), (int) (finalTime / pair.second())));
+                .thenApply(finalTime -> new Response(pair.first(), (int) (finalTime / pair.second())));
     }
 
     public static Sink<Pair<String, Integer>, CompletionStage<Long>> createSink() {

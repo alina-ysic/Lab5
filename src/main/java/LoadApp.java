@@ -80,7 +80,7 @@ public class LoadApp {
         return Source.from(Collections.singletonList(pair))
                 .toMat(testSink, Keep.right())
                 .run(materializer)
-                .thenApply(finalTime -> new Response(pair.first(), (int) (finalTime / pair.second())));
+                .thenApply(finalTime -> new Pair<>(pair.first(), (int) (finalTime / pair.second())));
     }
 
     public static Sink<Pair<String, Integer>, CompletionStage<Long>> createSink() {

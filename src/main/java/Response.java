@@ -1,4 +1,3 @@
-
 public class Response {
 
     private String url;

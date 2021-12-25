@@ -70,6 +70,7 @@ public class LoadApp {
                                 return ping(pair, materializer);
                             }))
                 .map((result) -> {
+                    System.out.println(result);
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
                             HttpEntities.create("URL: " + result.getUrl() + " RESPONSE TIME: " + result.getTime()

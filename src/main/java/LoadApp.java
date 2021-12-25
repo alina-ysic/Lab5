@@ -23,6 +23,8 @@ import java.util.concurrent.CompletionStage;
 
 import java.io.IOException;
 
+import static org.asynchttpclient.Dsl.asyncHttpClient;
+
 public class LoadApp {
 
     private static final String URL_PARAM = "testUrl";
@@ -88,7 +90,7 @@ public class LoadApp {
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {
                     long startTime = System.currentTimeMillis();
-                    return asyncHttpClient
+                    return asyncHttpClient()
                             .prepareGet(url)
                             .execute()
                             .toCompletableFuture()

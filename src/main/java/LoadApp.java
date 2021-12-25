@@ -52,7 +52,7 @@ public class LoadApp {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(ActorRef cacheActor, Http http, ActorSystem system, ActorMaterializer materializer) {
+    public static Flow getFlow(ActorRef cacheActor, Http http, ActorSystem system, ActorMaterializer materializer) {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {
@@ -61,13 +61,11 @@ public class LoadApp {
                     int count = Integer.parseInt(queue.get(COUNT_PARAM).get());
                     return new Pair(url, count);
                 })
-                .mapAsync(ASYNC_COUNT, (pair) -> {
-                    Patterns.ask(cacheActor, pair.first(), TIMEOUT)
+                .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
                                 if (result != null) return CompletableFuture.completedFuture(result);
                                 return ping(pair, materializer);
-                            });
-                })
+                            }))
                 .map((result) -> {
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(

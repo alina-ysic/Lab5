@@ -52,7 +52,7 @@ public class LoadApp {
                 .thenAccept(unbound -> system.terminate());
     }
 
-    public static Flow getFlow(ActorRef cacheActor, Http http, ActorSystem system, ActorMaterializer materializer) {
+    public static Flow<HttpRequest, HttpResponse, NotUsed> getFlow(ActorRef cacheActor, Http http, ActorSystem system, ActorMaterializer materializer) {
         return Flow
                 .of(HttpRequest.class)
                 .map((request) -> {

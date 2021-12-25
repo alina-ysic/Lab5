@@ -29,7 +29,6 @@ public class LoadApp {
     private static final String COUNT_PARAM = "count";
     private static final Integer ASYNC_COUNT = 5;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
-    private static final AsyncHttpClient asyncHttpClient = Dsl.asyncHttpClient();
     private static final Long ZERO= 0L;
 
     public static void main(String[] args) throws IOException {

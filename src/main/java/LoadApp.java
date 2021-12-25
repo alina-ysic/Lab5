@@ -62,7 +62,6 @@ public class LoadApp {
                     Query queue = request.getUri().query();
                     String url = queue.get(URL_PARAM).get();
                     int count = Integer.parseInt(queue.get(COUNT_PARAM).get());
-                    System.out.println(url);
                     return new Pair<>(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)

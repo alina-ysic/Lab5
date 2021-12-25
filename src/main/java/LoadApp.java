@@ -15,6 +15,7 @@ import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
+import org.asynchttpclient.Request;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -91,6 +92,7 @@ public class LoadApp {
                 .mapConcat((pair) -> Collections.nCopies(pair.second(), pair.first()))
                 .mapAsync(ASYNC_COUNT, url -> {
                     long startTime = System.currentTimeMillis();
+                    Request req = Dsl.get(url).build();
                     return asyncHttpClient()
                             .prepareGet(url)
                             .execute()

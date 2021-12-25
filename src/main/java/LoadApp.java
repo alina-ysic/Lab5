@@ -67,7 +67,7 @@ public class LoadApp {
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
-                                if ((Integer)result != DEFAULT_RESULT) return CompletableFuture.completedFuture(new Response(pair.first(), (Integer) result));
+                                //if ((Integer)result != DEFAULT_RESULT) return CompletableFuture.completedFuture(new Response(pair.first(), (Integer) result));
                                 return ping(pair, materializer);
                             }))
                 .map((result) -> {

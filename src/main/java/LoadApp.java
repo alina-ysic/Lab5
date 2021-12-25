@@ -32,6 +32,7 @@ public class LoadApp {
     private static final Integer ASYNC_COUNT = 5;
     private static final Duration TIMEOUT = Duration.ofSeconds(5);
     private static final Long ZERO= 0L;
+    private static final int DEFAULT_RESULT = -1;
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
@@ -64,7 +65,7 @@ public class LoadApp {
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)
                             .thenCompose((result) -> {
-                                if (result != null) return CompletableFuture.completedFuture(new Response(pair.first(), (Integer) result));
+                                if ((Integer)result != DEFAULT_RESULT) return CompletableFuture.completedFuture(new Response(pair.first(), (Integer) result));
                                 return ping(pair, materializer);
                             }))
                 .map((result) -> {

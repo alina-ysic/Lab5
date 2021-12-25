@@ -13,7 +13,7 @@ public class CacheActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(String.class, url -> sender().tell(cache.get(url), ActorRef.noSender()))
-                //.match(Response.class, cache.put())
+                .match(Response.class, response -> cache.put(response.getUrl(), ))
                 .build();
     }
 }

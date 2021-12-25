@@ -94,8 +94,7 @@ public class LoadApp {
                     long startTime = System.currentTimeMillis();
                     Request req = Dsl.get(url).build();
                     return asyncHttpClient()
-                            .prepareGet(url)
-                            .execute()
+                            .executeRequest(req)
                             .toCompletableFuture()
                             .thenApply((response -> System.currentTimeMillis() - startTime));
                 })

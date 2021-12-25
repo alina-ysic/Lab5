@@ -62,6 +62,7 @@ public class LoadApp {
                     Query queue = request.getUri().query();
                     String url = queue.get(URL_PARAM).get();
                     int count = Integer.parseInt(queue.get(COUNT_PARAM).get());
+                    System.out.println(url);
                     return new Pair<>(url, count);
                 })
                 .mapAsync(ASYNC_COUNT, (pair) -> Patterns.ask(cacheActor, pair.first(), TIMEOUT)
@@ -70,7 +71,6 @@ public class LoadApp {
                                 return ping(pair, materializer);
                             }))
                 .map((result) -> {
-                    System.out.println(result);
                     cacheActor.tell(result, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
                             HttpEntities.create("URL: " + result.getUrl() + " RESPONSE TIME: " + result.getTime()
